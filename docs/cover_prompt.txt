@@ -1,0 +1,12 @@
+Prompt used to generate docs/cover_master.png (16:9 key art, no text; typography composited separately to 800x450 workshop/preview.png):
+
+Generate a cinematic 16:9 widescreen post-apocalyptic survival game key art illustration (no text, no letters, no numbers, no logos, no watermarks, no UI overlays) for a ZED ZONE game mod cover, matching gritty dark zombie-survival promo art with dramatic rim lighting and high-detail painterly realism.
+
+Subject: A heroic close-up arrangement of three rugged, weathered portable survival appliances resting together on a scarred metal crate and concrete debris in the center foreground:
+1. Center-left: A heavy-duty tactical portable mini-fridge / cooler box with metal latches, its lid slightly propped open emitting a crisp icy-cyan glow and faint cold mist, showing neatly packed rations and cold drinks inside.
+2. Center-right: A rugged industrial portable battery charger box with coiled jumper cables, glowing emerald-green charge indicator LEDs, and rows of rechargeable battery cells visible inside its open tray.
+3. Back-right / angled behind: A compact rugged solar charger box with unfolded dark photovoltaic solar panels on its lid catching dramatic warm golden-amber light.
+
+Atmosphere & Lighting: Dark stormy twilight sky over ruined post-apocalyptic city silhouettes in the background; warm fire embers and dust floating in the air on the left; cool blue-grey mist on the right; rich color triad from the devices themselves (icy cyan fridge glow, emerald charger LEDs, warm amber solar reflections). Ultra-detailed worn metal, scratches, moisture, dramatic shadows.
+
+Composition: 16:9 landscape aspect ratio. Keep the top 22% dark moody sky and the bottom 12% dark shadowed foreground clean and uncluttered so title typography can be overlaid later.
