@@ -1,0 +1,20 @@
+id=3844189237
+version=1
+title=ZED ZONE: Expanded Portable Appliances 1.0.0
+visibility=public
+description=[h1]Expanded Portable Appliances 1.0.0[/h1]
+description=[b]Specially made by request for user: 6VaN4!K96[/b]
+description=[url=https://boosty.to/lrgpp][img]https://raw.githubusercontent.com/druidqwerty/ZedZoneExpandedAppliances/e6c552329066c1bc794627cdbe63806fb2a3204f/docs/banner.png[/img][/url]
+description=Enjoy the mod? Support development on Boosty.
+description=Expands the container grid capacity of the three portable storage appliances in ZED ZONE to a spacious [b]20x26 (520 slots)[/b] grid — with automatic safe upgrades for existing saves and full per-appliance size configuration.
+description=[h2]What It Expands[/h2]
+description=[list][*]Portable Mini Fridge (ID 1063): vanilla 8x6 (48 slots) -> 20x26 (520 slots).[*]Portable Charger Box (ID 1066): vanilla 8x4 (32 slots) -> 20x26 (520 slots).[*]Solar Charger Box (ID 1067): vanilla 8x4 (32 slots) -> 20x26 (520 slots).[/list]
+description=[h2]Key Features[/h2]
+description=[list][*]Safe Existing Save Upgrade: appliances you already own in backpacks, chests, vehicle trunks, or companion inventories automatically expand to 20x26 when loaded or opened — without losing or shifting any stored items.[*]Vanilla Mechanics Preserved: refrigeration, solar/car-battery charging, battery-only slot rules on chargers, and auto-sorting all work seamlessly across the entire expanded grid.[*]Fully Configurable (BepInEx/config/com.druid.zedzone.expandedappliances.cfg): toggle each appliance individually and set any custom width (8-40) and height (up to 100).[*]Safe Shrink Protection: by default (AllowSafeShrink = false), existing containers only expand and never shrink. Even if enabled, containers never shrink below the coordinates of stored items.[/list]
+description=[h2]Install & Requirements[/h2]
+description=Requires third-party [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3834614258]ZED ZONE Code Mod Loader[/url] (run install.cmd once). Code Mod Loader is not a mod by druidqwerty. Tested on ZED ZONE Patch 1.0.20.
+description=[h2]My mods for ZED ZONE[/h2]
+description=[list][*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3836613312]ZED ZONE: Smart Companions[/url] — tactical squad AI, base logistics, and autonomous companion survival.[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3843814457]ZED ZONE: Versatile Axes[/url] — Fire Axe & Multi Axe with BLUNT, CHOP, and DIG tool efficiency.[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844069315]ZED ZONE: Swift Crouch[/url] — balanced crouch speed boost with in-game F10 menu.[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844114022]ZED ZONE: Tactical Patrol Backpack Addon[/url] — 20x100 tabs + full RU translation for vanilla Patrol Backpack (ID 513).[/list]
+description=[url=https://github.com/druidqwerty/ZedZoneExpandedAppliances]GitHub repository, source code & config reference[/url]
+description=Mod ID: com.druid.zedzone.expandedappliances
+description=© 2026 druidqwerty. MIT License. Free and open source; AI-assisted code, direction and testing by druid.
