@@ -123,6 +123,194 @@ namespace ZedZone.ExpandedAppliances
             return upgraded;
         }
 
+        public const int NativeBatteryIndicatorSlots = 16;
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void ApplyStationaryChargerPrefabSize(TerrainObject_Production_Inventory prodInv)
+        {
+            if (ReferenceEquals(prodInv, null) || prodInv.Pointer == IntPtr.Zero)
+                return;
+
+            var charger = prodInv.TryCast<TerrainObject_Production_BatteryCharger>();
+            if (ReferenceEquals(charger, null) || charger.Pointer == IntPtr.Zero)
+                return;
+
+            if (!ApplianceConfig.TryGetStationaryChargerSize(out int targetW, out int targetH))
+                return;
+
+            var cur = charger.inventorySize;
+            bool allowShrink = ApplianceConfig.AllowSafeShrink != null && ApplianceConfig.AllowSafeShrink.Value;
+            int desiredX = allowShrink ? targetW : Math.Max(cur.x, targetW);
+            int desiredY = allowShrink ? targetH : Math.Max(cur.y, targetH);
+
+            if (cur.x != desiredX || cur.y != desiredY)
+            {
+                charger.inventorySize = new Vector2Int(desiredX, desiredY);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static bool EnsureStationaryChargerUpgraded(TerrainObject_Production_Inventory prodInv)
+        {
+            if (ReferenceEquals(prodInv, null) || prodInv.Pointer == IntPtr.Zero)
+                return false;
+
+            var charger = prodInv.TryCast<TerrainObject_Production_BatteryCharger>();
+            if (ReferenceEquals(charger, null) || charger.Pointer == IntPtr.Zero)
+                return false;
+
+            ApplyStationaryChargerPrefabSize(charger);
+
+            var objData = charger.objectData;
+            if (ReferenceEquals(objData, null) || objData.Pointer == IntPtr.Zero)
+                return false;
+
+            var pd = objData.productionData;
+            return EnsureStationaryChargerProductionDataUpgraded(pd);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static bool EnsureStationaryChargerProductionDataUpgraded(ProductionData pd)
+        {
+            if (ReferenceEquals(pd, null) || pd.Pointer == IntPtr.Zero)
+                return false;
+
+            if (pd.productionObjectType != ProductionObjectType.BatteryCharger)
+                return false;
+
+            if (!ApplianceConfig.TryGetStationaryChargerSize(out int targetW, out int targetH))
+                return false;
+
+            var inv = pd.inventoryData1;
+            if (ReferenceEquals(inv, null) || inv.Pointer == IntPtr.Zero)
+                return false;
+
+            return EnsureInventorySize(inv, targetW, targetH);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static int UpgradeAllStationaryChargers(ProductionManager pm, ManualLogSource log)
+        {
+            if (ReferenceEquals(pm, null) || pm.Pointer == IntPtr.Zero)
+                return 0;
+
+            if (!ApplianceConfig.TryGetStationaryChargerSize(out _, out _))
+                return 0;
+
+            var list = pm.productionDataList;
+            if (ReferenceEquals(list, null) || list.Pointer == IntPtr.Zero)
+                return 0;
+
+            int upgraded = 0;
+            int count = list.Count;
+            for (int i = 0; i < count; i++)
+            {
+                var pd = list[i];
+                if (EnsureStationaryChargerProductionDataUpgraded(pd))
+                {
+                    upgraded++;
+                }
+            }
+
+            if (upgraded > 0)
+            {
+                log?.LogInfo($"[ExpandedAppliances] Upgraded {upgraded} stationary Battery Charger(s) on load.");
+            }
+
+            return upgraded;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void SyncExpandedChargerIndicators(ProductionData pd)
+        {
+            if (ReferenceEquals(pd, null) || pd.Pointer == IntPtr.Zero || !pd.craftFinishFlag)
+                return;
+
+            var inv = pd.inventoryData1;
+            if (ReferenceEquals(inv, null) || inv.Pointer == IntPtr.Zero)
+                return;
+
+            int width = inv.inventorySizeX;
+            int height = inv.inventorySizeY;
+            if (width <= 0 || height <= 0 || width * height <= NativeBatteryIndicatorSlots)
+                return;
+
+            var items = inv.itemList;
+            if (ReferenceEquals(items, null) || items.Pointer == IntPtr.Zero || items.Count == 0)
+                return;
+
+            var im = ItemManager.instance;
+            if (ReferenceEquals(im, null) || im.Pointer == IntPtr.Zero)
+                return;
+
+            int overflowCharging = 0;
+            int overflowCharged = 0;
+            int count = items.Count;
+            for (int i = 0; i < count; i++)
+            {
+                var item = items[i];
+                if (ReferenceEquals(item, null) || item.Pointer == IntPtr.Zero)
+                    continue;
+
+                var attr = im.GetItemAttrById(item.itemId);
+                if (ReferenceEquals(attr, null) || attr.Pointer == IntPtr.Zero)
+                    continue;
+
+                var features = attr.itemFeatures;
+                if (ReferenceEquals(features, null) || features.Pointer == IntPtr.Zero || !features.Contains(ItemFeatureType.Battery))
+                    continue;
+
+                var batteryFeature = attr.GetItemFeatureByFeatureType(ItemFeatureType.Battery)?.TryCast<ItemFeature_Battery>();
+                if (ReferenceEquals(batteryFeature, null) || batteryFeature.Pointer == IntPtr.Zero)
+                    continue;
+
+                var coord = item.inventoryCoordinate;
+                int slotIndex = coord.y * width + coord.x;
+                if (slotIndex < NativeBatteryIndicatorSlots)
+                    continue;
+
+                float remaining = ItemFeature_Battery.GetBatteryRemainingPower(item);
+                if (remaining < batteryFeature.batteryCapacityFloat)
+                    overflowCharging++;
+                else
+                    overflowCharged++;
+            }
+
+            if (overflowCharging == 0 && overflowCharged == 0)
+                return;
+
+            bool anyChargingLed = false;
+            for (int s = 0; s < NativeBatteryIndicatorSlots; s++)
+            {
+                int cur = pd.GetBatteryState(s);
+                if (cur == 2)
+                {
+                    anyChargingLed = true;
+                    continue;
+                }
+
+                if (cur == 0)
+                {
+                    if (overflowCharging > 0)
+                    {
+                        pd.SetBatteryState(s, 2);
+                        overflowCharging--;
+                        anyChargingLed = true;
+                    }
+                    else if (overflowCharged > 0)
+                    {
+                        pd.SetBatteryState(s, 1);
+                        overflowCharged--;
+                    }
+                }
+            }
+
+            if (overflowCharging > 0 && !anyChargingLed)
+            {
+                pd.SetBatteryState(NativeBatteryIndicatorSlots - 1, 2);
+            }
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool EnsureInventorySize(InventoryData inv, int targetW, int targetH)
         {

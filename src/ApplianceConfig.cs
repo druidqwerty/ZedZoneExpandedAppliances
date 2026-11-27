@@ -25,6 +25,10 @@ namespace ZedZone.ExpandedAppliances
         public static ConfigEntry<int> SolarChargerWidth;
         public static ConfigEntry<int> SolarChargerHeight;
 
+        public static ConfigEntry<bool> StationaryChargerEnabled;
+        public static ConfigEntry<int> StationaryChargerWidth;
+        public static ConfigEntry<int> StationaryChargerHeight;
+
         public static ConfigEntry<bool> AllowSafeShrink;
 
         public static void Bind(ConfigFile config)
@@ -83,6 +87,22 @@ namespace ZedZone.ExpandedAppliances
                 DefaultHeight,
                 new ConfigDescription("Grid height for Solar Charger Box (vanilla: 4).", new AcceptableValueRange<int>(4, 100)));
 
+            StationaryChargerEnabled = config.Bind(
+                "StationaryBatteryCharger",
+                "Enabled",
+                true,
+                "Expand Stationary Battery Charger Bench (ID 126, vanilla 4x4).");
+            StationaryChargerWidth = config.Bind(
+                "StationaryBatteryCharger",
+                "Width",
+                DefaultWidth,
+                new ConfigDescription("Grid width for Stationary Battery Charger Bench (vanilla: 4).", new AcceptableValueRange<int>(4, 40)));
+            StationaryChargerHeight = config.Bind(
+                "StationaryBatteryCharger",
+                "Height",
+                DefaultHeight,
+                new ConfigDescription("Grid height for Stationary Battery Charger Bench (vanilla: 4).", new AcceptableValueRange<int>(4, 100)));
+
             AllowSafeShrink = config.Bind(
                 "Safety",
                 "AllowSafeShrink",
@@ -121,6 +141,22 @@ namespace ZedZone.ExpandedAppliances
                 default:
                     return false;
             }
+        }
+
+        public static bool TryGetStationaryChargerSize(out int width, out int height)
+        {
+            width = 0;
+            height = 0;
+
+            if (Enabled != null && !Enabled.Value)
+                return false;
+
+            if (StationaryChargerEnabled != null && !StationaryChargerEnabled.Value)
+                return false;
+
+            width = Clamp(StationaryChargerWidth != null ? StationaryChargerWidth.Value : DefaultWidth, 4, 40);
+            height = Clamp(StationaryChargerHeight != null ? StationaryChargerHeight.Value : DefaultHeight, 4, 100);
+            return true;
         }
 
         private static int Clamp(int value, int min, int max)

@@ -12,7 +12,7 @@ namespace ZedZone.ExpandedAppliances
     {
         public const string PluginGuid = "com.druid.zedzone.expandedappliances";
         public const string PluginName = "Expanded Portable Appliances";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.1.0";
 
         internal static ManualLogSource LogSource;
         internal static Harmony HarmonyInstance;
@@ -39,11 +39,26 @@ namespace ZedZone.ExpandedAppliances
                 // Will be applied in ItemManager.Init Postfix
             }
 
+            // In case ProductionManager was already initialized before plugin load
+            try
+            {
+                var pm = ProductionManager.instance;
+                if (!ReferenceEquals(pm, null) && pm.Pointer != IntPtr.Zero)
+                {
+                    ApplianceCapacityManager.UpgradeAllStationaryChargers(pm, LogSource);
+                }
+            }
+            catch
+            {
+                // Will be applied in ProductionManager.OnLoadGame Postfix
+            }
+
             LogSource.LogInfo(
                 $"[{PluginName} v{PluginVersion}] Loaded ({applied} Harmony target(s)). " +
                 $"Targets: Fridge(1063)={ApplianceConfig.FridgeWidth.Value}x{ApplianceConfig.FridgeHeight.Value}, " +
                 $"Charger(1066)={ApplianceConfig.PortableChargerWidth.Value}x{ApplianceConfig.PortableChargerHeight.Value}, " +
-                $"SolarCharger(1067)={ApplianceConfig.SolarChargerWidth.Value}x{ApplianceConfig.SolarChargerHeight.Value}.");
+                $"SolarCharger(1067)={ApplianceConfig.SolarChargerWidth.Value}x{ApplianceConfig.SolarChargerHeight.Value}, " +
+                $"StationaryBatteryCharger={ApplianceConfig.StationaryChargerWidth.Value}x{ApplianceConfig.StationaryChargerHeight.Value}.");
         }
     }
 }

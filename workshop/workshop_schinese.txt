@@ -1,18 +1,18 @@
-title=ZED ZONE: 便携电器扩容 1.0.0
+title=ZED ZONE: 便携电器扩容 1.1.0
 visibility=public
-description=[h1]便携电器扩容 1.0.0[/h1]
+description=[h1]便携电器扩容 1.1.0[/h1]
 description=[b]特别为玩家 6VaN4!K96 定制[/b]
 description=[url=https://boosty.to/lrgpp][img]https://raw.githubusercontent.com/druidqwerty/ZedZoneExpandedAppliances/e6c552329066c1bc794627cdbe63806fb2a3204f/docs/banner.png[/img][/url]
-description=喜欢这个模组吗？欢迎在 Boosty 支持开发。
-description=将 ZED ZONE 中三款便携式储物电器的容器网格扩展至宽敞的 [b]20x26（520 格）[/b]，支持旧存档安全自动升级，并可在配置文件中单独自定义每款电器的尺寸。
+description=免费开源。代码由 AI 编写，方向、测试和时间由我负责。如果这个模组让你的游戏体验更好：[url=https://boosty.to/lrgpp]在 Boosty 支持开发[/url]。
+description=将 ZED ZONE 中三款便携式储物电器及基地固定式[b]电池充电台[/b]的容器网格扩展至宽敞的 [b]20x26（520 格）[/b]，支持旧存档安全自动升级、全网格完整充电，并可在配置文件中单独自定义每款电器的尺寸。
 description=[h2]扩容内容[/h2]
-description=[list][*]便携迷你冰箱（ID 1063）：原版 8x6（48 格）-> 20x26（520 格）。[*]便携充电盒（ID 1066）：原版 8x4（32 格）-> 20x26（520 格）。[*]太阳能充电盒（ID 1067）：原版 8x4（32 格）-> 20x26（520 格）。[/list]
+description=[list][*]便携迷你冰箱（ID 1063）：原版 8x6（48 格）-> 20x26（520 格）。[*]便携充电盒（ID 1066）：原版 8x4（32 格）-> 20x26（520 格）。[*]太阳能充电盒（ID 1067）：原版 8x4（32 格）-> 20x26（520 格）。[*]固定式电池充电台（ID 126，v1.1.0 新增）：原版 4x4（16 格）-> 20x26（520 格）。[/list]
 description=[h2]主要特性[/h2]
-description=[list][*]旧存档安全升级：背包、箱子、车厢或队友物品栏中已有的便携电器在读档或打开时自动扩容至 20x26，不丢失、不移动任何物品。[*]保留原版机制：保鲜制冷、车载电瓶/太阳能充电、充电盒仅放电池限制以及自动整理均在扩容网格上正常工作。[*]完整配置（BepInEx/config/com.druid.zedzone.expandedappliances.cfg）：可单独开关每款电器，并自由设置宽度（8–40）和高度（最高 100）。[*]安全防缩容保护：默认（AllowSafeShrink = false）仅扩容不缩容；即使开启，也绝不会缩小到已存放物品的边界之内。[/list]
+description=[list][*]旧存档安全升级：背包、箱子、车厢或队友物品栏中已有的便携电器，以及基地中已建造的电池充电台在读档或打开时自动扩容至 20x26，不丢失、不移动任何物品。[*]全网格正常充电与指示灯同步：突破原版充电台 16 格指示灯索引上限，放在 20x26 任意位置的电池都能正常充电并同步更新机身 16 颗 LED 指示灯。[*]保留原版机制：保鲜制冷、车载电瓶/太阳能/基地电网充电、仅放电池限制以及自动整理均在扩容网格上正常工作。[*]完整配置（BepInEx/config/com.druid.zedzone.expandedappliances.cfg）：可单独开关每款电器（含 StationaryBatteryCharger），并自由设置宽度（4–40 / 8–40）和高度（最高 100）。[*]安全防缩容保护：默认（AllowSafeShrink = false）仅扩容不缩容；即使开启，也绝不会缩小到已存放物品的边界之内。[/list]
 description=[h2]安装与前置[/h2]
-description=需要第三方前置 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3834614258]ZED ZONE Code Mod Loader[/url]（运行一次 install.cmd）。Code Mod Loader 并非 druidqwerty 的模组。已在 ZED ZONE 1.0.20 补丁测试通过。
+description=需要第三方前置 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3834614258]ZED ZONE Code Mod Loader[/url]（运行一次 install.cmd）。Code Mod Loader 并非 druidqwerty 的模组。已在 ZED ZONE 1.0.23 补丁测试通过。
 description=[h2]我的 ZED ZONE 模组[/h2]
-description=[list][*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3836613312]ZED ZONE: Smart Companions[/url] — 战术小队 AI、基地后勤与同伴自主生存。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3843814457]ZED ZONE: Versatile Axes[/url] — 消防斧与多功能斧同时支持钝击、砍伐和挖掘。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844069315]ZED ZONE: Swift Crouch[/url] — 平衡的潜行加速与游戏内 F10 设置菜单。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844114022]ZED ZONE: Tactical Patrol Backpack Addon[/url] — 为原版战术巡逻背包（ID 513）提供 20x100 标签页与完整俄语本地化。[/list]
+description=[list][*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3836613312]ZED ZONE: Smart Companions[/url] — 智能队友、战术小队与基地物流。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3843814457]ZED ZONE: Versatile Axes[/url] — 消防斧与多功能斧同时具备钝击、砍伐与挖掘效率。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844069315]ZED ZONE: Swift Crouch[/url] — 平衡的潜行移速优化与 F10 菜单。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3844114022]ZED ZONE: Tactical Patrol Backpack Addon[/url] — 为原版战术巡逻背包 (ID 513) 提供多标签页扩展。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3845644311]ZED ZONE: Russian Translation Pack (5 Mods in 1)[/url] — 社区模组俄语整合包。[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3846246207]ZED ZONE: Bountiful Forage[/url] — 浆果、草药与灌木合理采集（F11 菜单）。[/list]
 description=[url=https://github.com/druidqwerty/ZedZoneExpandedAppliances]GitHub 仓库、源代码与配置说明[/url]
 description=Mod ID: com.druid.zedzone.expandedappliances
-description=© 2026 druidqwerty. MIT 许可证。免费开源；AI 辅助编码，由 druid 主导设计与测试。
+description=© 2026 druidqwerty。MIT 许可证。免费开源；代码由 AI 编写，方向与测试由 druid 完成。
